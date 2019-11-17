@@ -16,3 +16,7 @@ export { domain, host };
 export const LocalStorageKeys = {
   user: 'user', // 用户身份
 };
+
+export let AUTHOR = '成都印钞有限公司';
+
+export let company = AUTHOR;

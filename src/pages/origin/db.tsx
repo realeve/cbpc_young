@@ -23,7 +23,7 @@ export const getCbpcYoungOther = () =>
       });
 
 /**
- * SELECT a.username,a.usercode,a.deptname,a.rec_date,a.prod_quality,a.prod_produce,a.prod_cost,a.support_prod,a.support_attitude,a.manager,a.score FROM tbl_cbpc_young_base AS a
+ * SELECT a.username, a.deptname,a.rec_date,a.prod_quality,a.prod_produce,a.prod_cost,a.support_prod,a.support_attitude,a.manager,a.score FROM tbl_cbpc_young_base AS a
  *
  *   @database: { 接口管理 }
  *   @desc:     { 青年岗位积分——岗位业绩积分 }
