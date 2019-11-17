@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFetch, Table } from '@/components';
-
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
 interface IDbData {
   username: string;
   deptname: string;
@@ -125,32 +126,43 @@ const columnsBase = [
   },
 ];
 
-export default function() {
+export default connect(({ common }: { common: ICommon }) => common)(({ tstart, tend }: ICommon) => {
   const { data, loading } = useFetch<{
     title: string;
     data: IDbData[];
   }>({
     param: {
       url: '/93/1a31795568.json',
+      params: { tstart, tend },
     },
+    valid: () => tstart.length > 0 && tend.length > 0,
   });
 
   const { data: base, loading: loadingBase } = useFetch({
     param: {
       url: '/94/966772bc13.json',
+      params: { tstart, tend },
     },
+    valid: () => tstart.length > 0 && tend.length > 0,
   });
 
   return (
     <>
       <Table
         loading={loadingBase}
+        daterange={[tstart, tend]}
         data={base}
         columns={columnsBase}
         merge={['3-5', '6-7', '8']}
         mergetext={['生产操作岗', '生产保障岗位', '管理技术人员']}
       />
-      <Table loading={loading} data={data} columns={columnsOther} style={{ marginTop: 30 }} />
+      <Table
+        loading={loading}
+        daterange={[tstart, tend]}
+        data={data}
+        columns={columnsOther}
+        style={{ marginTop: 30 }}
+      />
     </>
   );
-}
+});

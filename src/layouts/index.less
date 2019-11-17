@@ -1,7 +1,13 @@
 .container {
+  .center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   :global {
     .ant-layout-header {
-      display: flex;
+      .center;
+      justify-content: space-between;
     }
   }
   .layout {
@@ -10,6 +16,8 @@
     min-height: 100vh;
     .logo {
       margin: 16px 24px 16px 0;
+      align-items: center;
+      display: flex;
     }
   }
 }

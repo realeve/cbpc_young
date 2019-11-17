@@ -1,5 +1,7 @@
 import React from 'react';
 import { useFetch, Table } from '@/components';
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
 
 interface IDbData {
   username: string;
@@ -46,15 +48,17 @@ const columns = [
   },
 ];
 
-export default function() {
+export default connect(({ common }: { common: ICommon }) => common)(({ tstart, tend }: ICommon) => {
   const { data, loading } = useFetch<{
     title: string;
     data: IDbData[];
   }>({
     param: {
       url: '/92/cd24026726.json',
+      params: { tstart, tend, tstart2: tstart, tend2: tend },
     },
+    valid: () => tstart.length > 0 && tend.length > 0,
   });
 
-  return <Table loading={loading} data={data} columns={columns} />;
-}
+  return <Table daterange={[tstart, tend]} loading={loading} data={data} columns={columns} />;
+});

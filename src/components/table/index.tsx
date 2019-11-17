@@ -19,10 +19,12 @@ export default function({
   loading,
   columns,
   style,
+  daterange,
   ...props
 }: {
   columns?: ColumnProps<any>[];
   loading?: boolean;
+  daterange?: string[];
   data?: {
     title: string;
     data: any[];
@@ -71,9 +73,19 @@ export default function({
     <Skeleton loading={loading}>
       <div className={styles.table} style={style}>
         <div className={styles.header}>
-          <h3>{data && data.title}</h3>
+          <h3>
+            {data && data.title}
+            {daterange && (
+              <>
+                <br />
+                <small style={{ fontWeight: 200 }}>
+                  ({daterange[0]}至{daterange[1]})
+                </small>
+              </>
+            )}
+          </h3>
           <div className={styles.action}>
-            <Button type="default" onClick={downloadExcel}>
+            <Button type="primary" onClick={downloadExcel}>
               下载报表
             </Button>
           </div>
