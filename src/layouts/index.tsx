@@ -20,6 +20,10 @@ const menu = [
     title: '原始数据',
     url: '/origin',
   },
+  {
+    title: '导入信息',
+    url: '/import',
+  },
 ];
 interface IProps {
   children: React.ReactNode;

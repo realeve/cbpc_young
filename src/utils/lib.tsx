@@ -43,3 +43,24 @@ export const setStore = (state, store: Store) => {
   });
   return nextState;
 };
+
+/**
+ *
+ * @param {file文件对象，input type="file"} file
+ * @param {回调函数} callback
+ * @desc 将file图像文件对象转换为BASE64
+ */
+export let loadDataFile: (file: File) => Promise<null | Blob> = async (file: File) => {
+  if (typeof FileReader === 'undefined') {
+    return Promise.resolve(null);
+  }
+
+  let reader: FileReader = new FileReader();
+  reader.readAsArrayBuffer(file);
+
+  return new Promise(resolve => {
+    reader.onload = ({ target: { result } }: { target: { result: Blob } }) => {
+      resolve(result);
+    };
+  });
+};
