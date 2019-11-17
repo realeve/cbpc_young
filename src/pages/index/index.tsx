@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import styles from './index.less';
-import { useFetch } from '@/components';
-import { Skeleton, Table } from 'antd';
-import { PaginationConfig } from 'antd/lib/pagination';
+import React from 'react';
+import { useFetch, Table } from '@/components';
+
 interface IDbData {
   username: string;
   usercode: string;
@@ -48,14 +46,6 @@ const columns = [
   },
 ];
 
-export const pageConfig: PaginationConfig = {
-  position: 'bottom',
-  pageSizeOptions: ['10', '20', '50', '100'],
-  showSizeChanger: true,
-  showQuickJumper: true,
-  showTotal: (total: number, range: number[]) => `第${range[0]}-${range[1]}，共 ${total} 条数据`,
-};
-
 export default function() {
   const { data, loading } = useFetch<{
     title: string;
@@ -64,28 +54,7 @@ export default function() {
     param: {
       url: '/92/cd24026726.json',
     },
-    callback: e => {
-      e.data = e.data.map((item: {}, key: number) => ({ key: key + 1, ...item }));
-      return e;
-    },
   });
 
-  const [pageSize, setPageSize] = useState(20);
-
-  return (
-    <Skeleton loading={loading}>
-      <div className={styles.table}>
-        <h3>{data && data.title}</h3>
-        <Table
-          columns={columns}
-          dataSource={data ? data.data : []}
-          pagination={{
-            ...pageConfig,
-            pageSize,
-            onShowSizeChange: (_, size) => setPageSize(size),
-          }}
-        />
-      </div>
-    </Skeleton>
-  );
+  return <Table loading={loading} data={data} columns={columns} />;
 }

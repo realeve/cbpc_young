@@ -3,6 +3,8 @@ import styles from './index.less';
 import { Layout, Menu, ConfigProvider } from 'antd';
 import { Logo } from '@/components';
 import zhCN from 'antd/es/locale/zh_CN';
+import router from 'umi/router';
+import { connect } from 'dva';
 
 const { Header, Content, Footer } = Layout;
 
@@ -16,8 +18,13 @@ const menu = [
     url: '/origin',
   },
 ];
-
-const App = ({ children }: { children: React.ReactNode }) => (
+interface IProps {
+  children: React.ReactNode;
+  location: {
+    pathname: string;
+  };
+}
+const App = ({ children, location }: IProps) => (
   <div className={styles.container}>
     <Layout className={styles.layout}>
       <Header>
@@ -25,11 +32,13 @@ const App = ({ children }: { children: React.ReactNode }) => (
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['/']}
+          defaultSelectedKeys={[location.pathname]}
           style={{ lineHeight: '64px' }}
         >
           {menu.map(item => (
-            <Menu.Item key={item.url}>{item.title}</Menu.Item>
+            <Menu.Item key={item.url} onClick={() => router.push(item.url)}>
+              {item.title}
+            </Menu.Item>
           ))}
         </Menu>
       </Header>
@@ -39,8 +48,8 @@ const App = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-export default ({ children }: { children: React.ReactNode }) => (
+export default connect()(({ children, ...props }: IProps) => (
   <ConfigProvider locale={zhCN}>
-    <App>{children}</App>
+    <App {...props}>{children}</App>
   </ConfigProvider>
-);
+));
