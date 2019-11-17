@@ -1,34 +1,39 @@
 import React from 'react';
 import styles from './index.less';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
+import { Logo } from '@/components';
 
 const { Header, Content, Footer } = Layout;
 
-export default () => (
+const menu = [
+  {
+    title: '得分排名',
+    url: '/',
+  },
+  {
+    title: '原始数据',
+    url: '/origin',
+  },
+];
+
+export default ({ children }: { children: React.ReactNode }) => (
   <div className={styles.container}>
-    <Layout className="layout">
+    <Layout className={styles.layout}>
       <Header>
-        <div className="logo" />
+        <Logo className={styles.logo} style={{ width: 32 }} />
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['/']}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
+          {menu.map(item => (
+            <Menu.Item key={item.url}>{item.title}</Menu.Item>
+          ))}
         </Menu>
       </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      <Content style={{ margin: 50, padding: 24, background: '#fff', flex: 1 }}>{children}</Content>
+      <Footer style={{ textAlign: 'center' }}>CBPC ©2019</Footer>
     </Layout>
   </div>
 );

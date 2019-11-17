@@ -1,0 +1,716 @@
+{
+  "data": [
+    {
+      "username": "张向军",
+      "usercode": "1000018",
+      "deptname": "胶凹团支部",
+      "base_score": "53.166667",
+      "other_score": 40,
+      "score": 93.17
+    },
+    {
+      "username": "李泽铭",
+      "usercode": "1400003",
+      "deptname": "人力资源部",
+      "base_score": "47.208333",
+      "other_score": 20.8,
+      "score": 68.01
+    },
+    {
+      "username": "郭大平",
+      "usercode": "1100024",
+      "deptname": "胶凹团支部",
+      "base_score": "46.383333",
+      "other_score": 14.4,
+      "score": 60.78
+    },
+    {
+      "username": "徐文庆",
+      "usercode": "1300006",
+      "deptname": "安全保卫部",
+      "base_score": "48.766667",
+      "other_score": 10.049999999999999,
+      "score": 58.82
+    },
+    {
+      "username": "赵昌玉",
+      "usercode": "1300019",
+      "deptname": "钞纸制作部",
+      "base_score": "55.000000",
+      "other_score": 3.7,
+      "score": 58.7
+    },
+    {
+      "username": "李宾",
+      "usercode": "0700033",
+      "deptname": "印钞管理部",
+      "base_score": "48.583333",
+      "other_score": 9.700000000000001,
+      "score": 58.28
+    },
+    {
+      "username": "张鹏",
+      "usercode": "0100021",
+      "deptname": "钞纸制作部",
+      "base_score": "54.725000",
+      "other_score": 3,
+      "score": 57.72
+    },
+    {
+      "username": "李扬洋",
+      "usercode": "1400024",
+      "deptname": "胶凹团支部",
+      "base_score": "52.983333",
+      "other_score": 4.5,
+      "score": 57.48
+    },
+    {
+      "username": "李国亮",
+      "usercode": "1300011",
+      "deptname": "胶凹团支部",
+      "base_score": "53.350000",
+      "other_score": 3.9,
+      "score": 57.25
+    },
+    {
+      "username": "邹青",
+      "usercode": "1200011",
+      "deptname": "印码制作部",
+      "base_score": "50.875000",
+      "other_score": 6,
+      "score": 56.88
+    },
+    {
+      "username": "董磊",
+      "usercode": "1200027",
+      "deptname": "胶凹团支部",
+      "base_score": "55.000000",
+      "other_score": 1.5,
+      "score": 56.5
+    },
+    {
+      "username": "张伟超",
+      "usercode": "1400015",
+      "deptname": "钞纸制作部",
+      "base_score": "54.725000",
+      "other_score": 1.3,
+      "score": 56.02
+    },
+    {
+      "username": "罗明亮",
+      "usercode": "1300025",
+      "deptname": "胶凹团支部",
+      "base_score": "52.891667",
+      "other_score": 3,
+      "score": 55.89
+    },
+    {
+      "username": "孙梦凡",
+      "usercode": "1300022",
+      "deptname": "钞纸成品制作部",
+      "base_score": "53.991667",
+      "other_score": 1.8,
+      "score": 55.79
+    },
+    {
+      "username": "童银东",
+      "usercode": "1200018",
+      "deptname": "钞纸制作部",
+      "base_score": "54.908333",
+      "other_score": 0.8,
+      "score": 55.71
+    },
+    {
+      "username": "张鹏",
+      "usercode": "0100021",
+      "deptname": "胶凹团支部",
+      "base_score": "52.525000",
+      "other_score": 3,
+      "score": 55.52
+    },
+    {
+      "username": "吴勇",
+      "usercode": "1300046",
+      "deptname": "胶凹团支部",
+      "base_score": "55.000000",
+      "other_score": 0.5,
+      "score": 55.5
+    },
+    {
+      "username": "罗维",
+      "usercode": "1100034",
+      "deptname": "钞纸制作部",
+      "base_score": "54.725000",
+      "other_score": 0.6000000000000001,
+      "score": 55.32
+    },
+    {
+      "username": "宋鹏",
+      "usercode": "1400012",
+      "deptname": "印码制作部",
+      "base_score": "52.250000",
+      "other_score": 3,
+      "score": 55.25
+    },
+    {
+      "username": "赵健",
+      "usercode": "1300039",
+      "deptname": "印码制作部",
+      "base_score": "51.333333",
+      "other_score": 3.9,
+      "score": 55.23
+    },
+    {
+      "username": "陈奎",
+      "usercode": "1000017",
+      "deptname": "印码制作部",
+      "base_score": "53.166667",
+      "other_score": 2,
+      "score": 55.17
+    },
+    {
+      "username": "林凯",
+      "usercode": "1100020",
+      "deptname": "印码制作部",
+      "base_score": "52.250000",
+      "other_score": 2.6999999999999997,
+      "score": 54.95
+    },
+    {
+      "username": "李琴琴",
+      "usercode": "0700015",
+      "deptname": "印码制作部",
+      "base_score": "53.166667",
+      "other_score": 1.6,
+      "score": 54.77
+    },
+    {
+      "username": "门延坤",
+      "usercode": "1000011",
+      "deptname": "印码制作部",
+      "base_score": "53.166667",
+      "other_score": 1.5,
+      "score": 54.67
+    },
+    {
+      "username": "刘梦",
+      "usercode": "1100022",
+      "deptname": "印码制作部",
+      "base_score": "53.625000",
+      "other_score": 1,
+      "score": 54.62
+    },
+    {
+      "username": "张桁隐",
+      "usercode": "1400028",
+      "deptname": "设备管理部",
+      "base_score": "53.625000",
+      "other_score": 0.75,
+      "score": 54.38
+    },
+    {
+      "username": "梁超",
+      "usercode": "1200015",
+      "deptname": "钞纸成品制作部",
+      "base_score": "53.991667",
+      "other_score": 0.3,
+      "score": 54.29
+    },
+    {
+      "username": "李爽",
+      "usercode": "1400029",
+      "deptname": "设备管理部",
+      "base_score": "53.625000",
+      "other_score": 0.6,
+      "score": 54.22
+    },
+    {
+      "username": "杜轲",
+      "usercode": "1300063",
+      "deptname": "印码制作部",
+      "base_score": "53.166667",
+      "other_score": 1,
+      "score": 54.17
+    },
+    {
+      "username": "徐微微",
+      "usercode": "1100066",
+      "deptname": "印钞数管部",
+      "base_score": "53.625000",
+      "other_score": 0.30000000000000004,
+      "score": 53.92
+    },
+    {
+      "username": "周婧秋",
+      "usercode": "1400010",
+      "deptname": "人力资源部",
+      "base_score": "48.125000",
+      "other_score": 5.800000000000001,
+      "score": 53.92
+    },
+    {
+      "username": "黄宇翔",
+      "usercode": "1500007",
+      "deptname": "设备管理部",
+      "base_score": "53.625000",
+      "other_score": 0.3,
+      "score": 53.92
+    },
+    {
+      "username": "韩桃",
+      "usercode": "0800028",
+      "deptname": "印钞数管部",
+      "base_score": "53.166667",
+      "other_score": 0.7000000000000001,
+      "score": 53.87
+    },
+    {
+      "username": "潘源滨",
+      "usercode": "1000036",
+      "deptname": "印码制作部",
+      "base_score": "52.708333",
+      "other_score": 1,
+      "score": 53.71
+    },
+    {
+      "username": "张琴",
+      "usercode": "0400018",
+      "deptname": "印码制作部",
+      "base_score": "52.708333",
+      "other_score": 1,
+      "score": 53.71
+    },
+    {
+      "username": "杨夏",
+      "usercode": "0200075",
+      "deptname": "印码制作部",
+      "base_score": "52.708333",
+      "other_score": 1,
+      "score": 53.71
+    },
+    {
+      "username": "彭波",
+      "usercode": "1300066",
+      "deptname": "印码制作部",
+      "base_score": "52.708333",
+      "other_score": 1,
+      "score": 53.71
+    },
+    {
+      "username": "姜维",
+      "usercode": "1100048",
+      "deptname": "印钞数管部",
+      "base_score": "53.166667",
+      "other_score": 0.5,
+      "score": 53.67
+    },
+    {
+      "username": "曹浩",
+      "usercode": "1300016",
+      "deptname": "胶凹团支部",
+      "base_score": "51.608333",
+      "other_score": 2,
+      "score": 53.61
+    },
+    {
+      "username": "陈若曦",
+      "usercode": "0600013",
+      "deptname": "印码制作部",
+      "base_score": "52.250000",
+      "other_score": 1,
+      "score": 53.25
+    },
+    {
+      "username": "陈禹安",
+      "usercode": "1400018",
+      "deptname": "印码制作部",
+      "base_score": "50.416667",
+      "other_score": 2.6,
+      "score": 53.02
+    },
+    {
+      "username": "李思然",
+      "usercode": "1400027",
+      "deptname": "钞纸成品制作部",
+      "base_score": "52.525000",
+      "other_score": 0.4,
+      "score": 52.92
+    },
+    {
+      "username": "王杨",
+      "usercode": "1300047",
+      "deptname": "印码制作部",
+      "base_score": "51.333333",
+      "other_score": 1.5,
+      "score": 52.83
+    },
+    {
+      "username": "李志杨",
+      "usercode": "0700012",
+      "deptname": "钞纸成品制作部",
+      "base_score": "52.525000",
+      "other_score": 0.3,
+      "score": 52.82
+    },
+    {
+      "username": "陈兰",
+      "usercode": "0300059",
+      "deptname": "印码制作部",
+      "base_score": "51.791667",
+      "other_score": 1,
+      "score": 52.79
+    },
+    {
+      "username": "黄文韬",
+      "usercode": "1400040",
+      "deptname": "印码制作部",
+      "base_score": "52.250000",
+      "other_score": 0.5,
+      "score": 52.75
+    },
+    {
+      "username": "谭万能",
+      "usercode": "1300018",
+      "deptname": "钞纸成品制作部",
+      "base_score": "51.608333",
+      "other_score": 1,
+      "score": 52.61
+    },
+    {
+      "username": "刘一宏",
+      "usercode": "1100044",
+      "deptname": "安全保卫部",
+      "base_score": "46.750000",
+      "other_score": 5.7,
+      "score": 52.45
+    },
+    {
+      "username": "王媛婷",
+      "usercode": "1000043",
+      "deptname": "印码制作部",
+      "base_score": "51.333333",
+      "other_score": 1,
+      "score": 52.33
+    },
+    {
+      "username": "周自兵",
+      "usercode": "1100030",
+      "deptname": "印码制作部",
+      "base_score": "51.333333",
+      "other_score": 1,
+      "score": 52.33
+    },
+    {
+      "username": "刘吴勇",
+      "usercode": "1100039",
+      "deptname": "印码制作部",
+      "base_score": "50.875000",
+      "other_score": 1,
+      "score": 51.88
+    },
+    {
+      "username": "陈曲",
+      "usercode": "0600031",
+      "deptname": "印码制作部",
+      "base_score": "50.875000",
+      "other_score": 1,
+      "score": 51.88
+    },
+    {
+      "username": "王虎",
+      "usercode": "1100040",
+      "deptname": "印码制作部",
+      "base_score": "50.875000",
+      "other_score": 1,
+      "score": 51.88
+    },
+    {
+      "username": "李阳程",
+      "usercode": "0500028",
+      "deptname": "检封制作部",
+      "base_score": "50.691667",
+      "other_score": 0.75,
+      "score": 51.44
+    },
+    {
+      "username": "杨力",
+      "usercode": "1300028",
+      "deptname": "检封制作部",
+      "base_score": "50.508333",
+      "other_score": 0.75,
+      "score": 51.26
+    },
+    {
+      "username": "许可",
+      "usercode": "1400039",
+      "deptname": "检封制作部",
+      "base_score": "50.691667",
+      "other_score": 0.44999999999999996,
+      "score": 51.14
+    },
+    {
+      "username": "沈娟",
+      "usercode": "1300058",
+      "deptname": "检封制作部",
+      "base_score": "50.966667",
+      "other_score": 0.1,
+      "score": 51.07
+    },
+    {
+      "username": "杨杰",
+      "usercode": "1300013",
+      "deptname": "胶凹团支部",
+      "base_score": "49.041667",
+      "other_score": 2,
+      "score": 51.04
+    },
+    {
+      "username": "昝晨曲",
+      "usercode": "1400025",
+      "deptname": "检封制作部",
+      "base_score": "49.225000",
+      "other_score": 1.7999999999999998,
+      "score": 51.02
+    },
+    {
+      "username": "陈佟佟",
+      "usercode": "1000010",
+      "deptname": "印码制作部",
+      "base_score": "49.500000",
+      "other_score": 1.5,
+      "score": 51
+    },
+    {
+      "username": "邓小建",
+      "usercode": "1200010",
+      "deptname": "印码制作部",
+      "base_score": "49.958333",
+      "other_score": 1,
+      "score": 50.96
+    },
+    {
+      "username": "邢阳",
+      "usercode": "1300055",
+      "deptname": "检封制作部",
+      "base_score": "49.500000",
+      "other_score": 1.05,
+      "score": 50.55
+    },
+    {
+      "username": "熊伟伟",
+      "usercode": "1000020",
+      "deptname": "印码制作部",
+      "base_score": "49.500000",
+      "other_score": 1,
+      "score": 50.5
+    },
+    {
+      "username": "李胜金",
+      "usercode": "0300055",
+      "deptname": "印码制作部",
+      "base_score": "49.500000",
+      "other_score": 1,
+      "score": 50.5
+    },
+    {
+      "username": "刘忠睿",
+      "usercode": "1100032",
+      "deptname": "钞纸成品制作部",
+      "base_score": "49.958333",
+      "other_score": 0.4,
+      "score": 50.36
+    },
+    {
+      "username": "谢宇晨",
+      "usercode": "1300048",
+      "deptname": "检封制作部",
+      "base_score": "49.500000",
+      "other_score": 0.44999999999999996,
+      "score": 49.95
+    },
+    {
+      "username": "王鸽",
+      "usercode": "0800017",
+      "deptname": "检封制作部",
+      "base_score": "47.483333",
+      "other_score": 2.4,
+      "score": 49.88
+    },
+    {
+      "username": "刘军",
+      "usercode": "1200035",
+      "deptname": "能源环保部",
+      "base_score": "49.500000",
+      "other_score": 0.3,
+      "score": 49.8
+    },
+    {
+      "username": "蒋好",
+      "usercode": "0400036",
+      "deptname": "检封制作部",
+      "base_score": "48.491667",
+      "other_score": 0.15,
+      "score": 48.64
+    },
+    {
+      "username": "王维玥",
+      "usercode": "1300051",
+      "deptname": "检封制作部",
+      "base_score": "47.025000",
+      "other_score": 1.2,
+      "score": 48.22
+    },
+    {
+      "username": "周海兵",
+      "usercode": "1000022",
+      "deptname": "印码制作部",
+      "base_score": "46.016667",
+      "other_score": 1.7999999999999998,
+      "score": 47.82
+    },
+    {
+      "username": "赵琪",
+      "usercode": "1300026",
+      "deptname": "检封制作部",
+      "base_score": "47.666667",
+      "other_score": 0.1,
+      "score": 47.77
+    },
+    {
+      "username": "罗克",
+      "usercode": "1500003",
+      "deptname": "钞纸制作部",
+      "base_score": "46.750000",
+      "other_score": 1,
+      "score": 47.75
+    },
+    {
+      "username": "汪莹",
+      "usercode": "1000044",
+      "deptname": "检封制作部",
+      "base_score": "47.300000",
+      "other_score": 0.2,
+      "score": 47.5
+    },
+    {
+      "username": "孙雅婧",
+      "usercode": "0800023",
+      "deptname": "检封制作部",
+      "base_score": "47.300000",
+      "other_score": 0.1,
+      "score": 47.4
+    },
+    {
+      "username": "陈欣怡",
+      "usercode": "1300030",
+      "deptname": "检封制作部",
+      "base_score": "47.300000",
+      "other_score": 0.1,
+      "score": 47.4
+    },
+    {
+      "username": "陈文俊",
+      "usercode": "0700032",
+      "deptname": "能源环保部",
+      "base_score": "46.750000",
+      "other_score": 0.6,
+      "score": 47.35
+    },
+    {
+      "username": "张勋",
+      "usercode": "1100079",
+      "deptname": "长城团总支",
+      "base_score": "46.750000",
+      "other_score": 0.3,
+      "score": 47.05
+    },
+    {
+      "username": "张媛",
+      "usercode": "0900026",
+      "deptname": "钞纸成品制作部",
+      "base_score": "46.108333",
+      "other_score": 0.8,
+      "score": 46.91
+    },
+    {
+      "username": "杨关民",
+      "usercode": "0800019",
+      "deptname": "检封制作部",
+      "base_score": "45.650000",
+      "other_score": 0.1,
+      "score": 45.75
+    },
+    {
+      "username": "喻林",
+      "usercode": "0500022",
+      "deptname": "印码制作部",
+      "base_score": "44.916667",
+      "other_score": 0.30000000000000004,
+      "score": 45.22
+    },
+    {
+      "username": "孙鹏飞",
+      "usercode": "1200033",
+      "deptname": "长城团总支",
+      "base_score": "44.000000",
+      "other_score": 0.3,
+      "score": 44.3
+    },
+    {
+      "username": "吴心刚",
+      "usercode": "1300040",
+      "deptname": "长城团总支",
+      "base_score": "44.000000",
+      "other_score": 0.3,
+      "score": 44.3
+    },
+    {
+      "username": "熊宇",
+      "usercode": "1300035",
+      "deptname": "长城团总支",
+      "base_score": "44.000000",
+      "other_score": 0.15,
+      "score": 44.15
+    },
+    {
+      "username": "李陆陆",
+      "usercode": "1500006",
+      "deptname": "技术中心",
+      "base_score": null,
+      "other_score": 15,
+      "score": null
+    },
+    {
+      "username": "宋丽娜",
+      "usercode": "1600004",
+      "deptname": "技术中心",
+      "base_score": null,
+      "other_score": 45,
+      "score": null
+    },
+    {
+      "username": "王轩",
+      "usercode": "0800009",
+      "deptname": "技术中心",
+      "base_score": null,
+      "other_score": 0.3,
+      "score": null
+    },
+    {
+      "username": "童树波",
+      "usercode": "1300060",
+      "deptname": "技术中心",
+      "base_score": null,
+      "other_score": 2.1,
+      "score": null
+    }
+  ],
+  "rows": 88,
+  "dates": ["20191114", "20191117"],
+  "ip": "0.0.0.0",
+  "header": ["username", "usercode", "deptname", "base_score", "other_score", "score"],
+  "title": "得分排名",
+  "time": "38.264ms",
+  "serverTime": "2019-11-17 12:16:48",
+  "source": "数据来源：接口管理"
+}
