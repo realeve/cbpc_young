@@ -69,6 +69,7 @@ const ImportApp = ({ user }: ICommon) => {
           score_type,
           score,
           remark,
+          uid: user.uid,
         }),
       );
       api = 'addCbpcYoungOther';
@@ -99,6 +100,7 @@ const ImportApp = ({ user }: ICommon) => {
           support_attitude,
           manager,
           score: R.type(score) === 'Object' ? score.result : score,
+          uid: user.uid,
         }),
       );
     }
