@@ -72,6 +72,8 @@ export default connect(({ common }: { common: ICommon }) => common)(
     );
 
     const [visible, setVisible] = useState(false);
+    const [baseVisible, setBaseVisible] = useState(false);
+
     const [state, setState] = useSetState({});
 
     const columnsOther = [
@@ -229,7 +231,14 @@ export default connect(({ common }: { common: ICommon }) => common)(
           if (user.gm == '1' || user.manage_dept.includes(item.deptname)) {
             return (
               <span>
-                <a>编辑</a>
+                <a
+                  onClick={() => {
+                    setBaseVisible(true);
+                    setState(item);
+                  }}
+                >
+                  编辑
+                </a>
                 <Divider type="vertical" />
                 <DelBtn isBase id={item.id} />
               </span>
@@ -279,6 +288,170 @@ export default connect(({ common }: { common: ICommon }) => common)(
           columns={columnsOther}
           style={{ marginTop: 30 }}
         />
+
+        <Modal
+          title="编辑岗位业绩数据"
+          visible={baseVisible}
+          onCancel={() => {
+            setBaseVisible(false);
+          }}
+          onOk={() => {
+            let {
+              rec_date,
+              prod_quality,
+              prod_produce,
+              prod_cost,
+              support_prod,
+              support_attitude,
+              manager,
+              score,
+              id: _id,
+            } = state;
+
+            // 总分相加
+            score =
+              Number(prod_quality) +
+              Number(prod_produce) +
+              Number(prod_cost) +
+              Number(support_prod) +
+              Number(support_attitude) +
+              Number(manager);
+
+            let params = {
+              rec_date,
+              prod_quality,
+              prod_produce,
+              prod_cost,
+              support_prod,
+              support_attitude,
+              manager,
+              score,
+              _id,
+            };
+            db.setCbpcYoungBase(params).then(() => {
+              setBaseVisible(false);
+              message.success('修改成功');
+              // 更新数据
+              let idx = R.findIndex(item => item.id == _id)(base.data);
+              let nextData = R.update(idx, state, base.data);
+              setBaseData({ ...data, data: nextData });
+            });
+          }}
+          okText="保存"
+        >
+          <div className={styles.form}>
+            <div className={styles.item}>
+              <div className={styles.label}>姓名</div>
+              <span>{state.username}</span>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>部门</div>
+              <span>{state.deptname}</span>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>记录月份</div>
+              <Input
+                value={state.rec_date}
+                onChange={e => setState({ rec_date: e.target.value })}
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                生产操作岗
+                <br />
+                (质量)
+              </div>
+              <Input
+                value={state.prod_quality}
+                onChange={e => setState({ prod_quality: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                生产操作岗
+                <br />
+                (产量)
+              </div>
+              <Input
+                value={state.prod_produce}
+                onChange={e => setState({ prod_produce: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                生产操作岗
+                <br />
+                (成本)
+              </div>
+              <Input
+                value={state.prod_cost}
+                onChange={e => setState({ prod_cost: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                生产保障岗
+                <br />
+                非计划停机时间
+              </div>
+              <Input
+                value={state.support_prod}
+                onChange={e => setState({ support_prod: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                生产保障岗
+                <br />
+                服务态度
+              </div>
+              <Input
+                value={state.support_attitude}
+                onChange={e => setState({ support_attitude: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>
+                管理技术人员
+                <br />
+                绩效得分
+              </div>
+              <Input
+                value={state.manager}
+                onChange={e => setState({ manager: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+
+            <div className={styles.item}>
+              <div className={styles.label}>总分</div>
+              <Input
+                value={state.score}
+                onChange={e => setState({ score: e.target.value })}
+                className={styles.input}
+                type="number"
+              />
+            </div>
+          </div>
+        </Modal>
 
         <Modal
           title="编辑数据"
@@ -347,6 +520,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
                 value={state.score}
                 onChange={e => setState({ score: e.target.value })}
                 className={styles.input}
+                type="number"
               />
             </div>
             <div className={styles.item}>

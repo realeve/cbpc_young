@@ -71,3 +71,15 @@ export const setCbpcYoungOther = params =>
     url: '/101/74654847ae.json',
     params,
   });
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 青年积分系统_岗位绩效修改 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号
+    const { rec_date, prod_quality, prod_produce, prod_cost, support_prod, support_attitude, manager, score, _id } = params;
+*/
+export const setCbpcYoungBase = params =>
+  axios({
+    url: '/102/44b35940f1.json',
+    params,
+  });
