@@ -4,6 +4,7 @@ import theme from '@ant-design/aliyun-theme';
 const config: IConfig = {
   treeShaking: true,
   theme,
+  exportStatic: false,
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     [
@@ -14,7 +15,6 @@ const config: IConfig = {
         dynamicImport: { webpackChunkName: true },
         title: 'cbpc_young',
         dll: true,
-
         routes: {
           exclude: [
             /models\//,

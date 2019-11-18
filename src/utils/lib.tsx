@@ -64,3 +64,7 @@ export let loadDataFile: (file: File) => Promise<null | Blob> = async (file: Fil
     };
   });
 };
+
+export const encodeBase64 = (str: string) => window.btoa(unescape(encodeURIComponent(str)));
+
+export const decodeBase64 = (str: string) => decodeURIComponent(escape(window.atob(str)));

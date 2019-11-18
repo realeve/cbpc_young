@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Icon, Upload, Spin } from 'antd';
+import { Button, Icon, Upload, Spin, notification, Progress } from 'antd';
 import * as lib from '@/utils/lib';
-import styles from './index.less';
+// import styles from './index.less';
 import Excel from 'exceljs/dist/es5/exceljs.browser.js';
 import * as R from 'ramda';
+import * as db from './db';
+
+import { Typography, Divider } from 'antd';
+
+const { Title, Paragraph, Text } = Typography;
+
 // https://github.com/exceljs/exceljs/issues/832
 // i use the vue template
-/* <input type="file" @change="handleChange" />
-
+/* <input type="file" onChange={handleChange} /> 
 
 handleChange(e) {
   this.file = e.target.files[0]
@@ -31,29 +36,145 @@ handleImport() {
 } */
 
 export default () => {
-  const [files, setFiles] = useState([]);
   const [sheet, setSheet] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [percent, setPercent] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState('active');
 
-  const decodeXlsx = sheet => {
+  const decodeXlsx = async sheet => {
+    let data = [];
+    let header = [];
+    let api = '';
+    let message = '';
     sheet.eachRow((row, rowIndex) => {
       let res = R.tail(row.values);
-      console.log(res);
+      if (rowIndex === 1) {
+        header = res;
+      } else {
+        data.push(res);
+      }
     });
+    // 其余得分
+    if (header.includes('备注')) {
+      data = data.map(
+        ([username, usercode, deptname, rec_date, score_type, score = 0, remark = '']) => ({
+          username,
+          usercode,
+          deptname,
+          rec_date,
+          score_type,
+          score,
+          remark,
+        }),
+      );
+      api = 'addCbpcYoungOther';
+      message = `【其余积分】数据共${data.length}条 上传完毕`;
+    } else {
+      api = 'addCbpcYoungBase';
+      message = `【岗位业绩积分】数据共${data.length}条 上传完毕`;
+      data = data.map(
+        ([
+          username,
+          usercode,
+          deptname,
+          rec_date,
+          prod_quality = 0,
+          prod_produce = 0,
+          prod_cost = 0,
+          support_prod = 0,
+          support_attitude = 0,
+          manager = 0,
+          score = 0,
+        ]) => ({
+          username,
+          usercode,
+          deptname,
+          rec_date,
+          prod_quality,
+          prod_produce,
+          prod_cost,
+          support_prod,
+          support_attitude,
+          manager,
+          score: R.type(score) === 'Object' ? score.result : score,
+        }),
+      );
+    }
+
+    let uploadSize = 100;
+    setPercent(0);
+    setUploading(true);
+    setUploadStatus('active');
+
+    let dataList = R.splitEvery(uploadSize, data);
+    let isSuccess = true;
+    for (let i = 0; isSuccess && i < dataList.length; i++) {
+      let value = dataList[i];
+      let percentage = Math.min(Math.round(((i + 1) * uploadSize * 100) / data.length), 100);
+      await db[api](value)
+        .then(res => {
+          setPercent(percentage);
+        })
+        .catch(e => {
+          console.log(e);
+          setUploadStatus('exception');
+          isSuccess = false;
+        });
+    }
+    if (isSuccess) {
+      setUploading(false);
+      notification.success({
+        message: '上传完毕',
+        description: message,
+      });
+    }
   };
 
+  // 文件对象：https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
   return (
     <div>
+      <Typography>
+        <Title level={2}>文件上传注意事项</Title>
+        <Paragraph>文件上传前请仔细阅读以下注意事项，否则会导致上传失败：</Paragraph>
+        <Paragraph>
+          <ul>
+            <li>
+              模板文件
+              <a href="/doc/积分模板.xlsx" target="_blank">
+                (点击此处下载)
+              </a>
+              中已经定义了用户填写时所需的数据校验，『部门』或其余得分中『得分类型』可选项，
+              <Text mark>严格按照模板中给定的数据填写，『切勿修改模板文件』</Text>;
+            </li>
+            <li>
+              作为个人信息检索的唯一凭证,<Text mark>『员工保险编码』必须填写</Text>;
+            </li>
+            <li>
+              <Text mark>『部门』、『类别』</Text>
+              等字段从下拉框中选择录入，其中『类别』信息将用于加分时的计算;
+            </li>
+            <li>
+              <Text mark>数据上传前请仔细检查有无空缺项或者无效数据（比如#N/A等信息）</Text>
+              ，上传前将<Text mark>岗位绩效得分中的总分</Text>用公式填充一遍;
+            </li>
+            <li>
+              <Text mark>生产操作岗、生产保障岗位、管理技术人员</Text>
+              分别只填写各自相关的分数信息即可。
+            </li>
+            <li>
+              <Text mark>第一行为表头信息，请勿调整</Text>，后面分别对应数据信息。
+            </li>
+          </ul>
+        </Paragraph>
+        <Divider />
+      </Typography>
       <div style={{ width: 300, marginBottom: 20 }}>
         <Upload.Dragger
-          fileList={files}
-          //   showUploadList={false}
-          onRemove={() => {
-            setFiles([]);
-            setSheet([]);
-          }}
+          showUploadList={false}
+          accept=".xlsx"
+          style={{ padding: 10 }}
           beforeUpload={file => {
-            setFiles([file]);
             setLoading(true);
             lib.loadDataFile(file).then(buffer => {
               if (!buffer) {
@@ -62,13 +183,22 @@ export default () => {
               }
               const wb = new Excel.Workbook();
               const sheetList = [];
-              wb.xlsx.load(buffer).then(workbook => {
-                workbook.eachSheet(sheetItem => {
-                  sheetList.push(sheetItem);
+              wb.xlsx
+                .load(buffer)
+                .then(workbook => {
+                  workbook.eachSheet(sheetItem => {
+                    sheetList.push(sheetItem);
+                  });
+                  setSheet(sheetList);
+                  setLoading(false);
+                })
+                .catch(e => {
+                  notification.error({
+                    message: '文件解析错误',
+                    description: '错误信息:' + e.message,
+                  });
+                  setLoading(false);
                 });
-                setSheet(sheetList);
-                setLoading(false);
-              });
             });
             return false;
           }}
@@ -80,6 +210,7 @@ export default () => {
             <p className="ant-upload-text">点击或拖拽文件到这里上传数据</p>
             <p className="ant-upload-hint">只支持上传xlsx文件</p>
           </Spin>
+          {uploading && <Progress percent={percent} size="small" status={uploadStatus} />}
         </Upload.Dragger>
       </div>
       {sheet.map((item, key) => (

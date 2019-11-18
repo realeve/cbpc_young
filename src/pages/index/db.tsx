@@ -9,9 +9,7 @@ import { axios, DEV, mock } from '@/utils/axios';
     const { tstart, tend } = params;
 */
 export const getCbpcYoungOther = (params: any) =>
-  DEV
-    ? mock(require('@/mock/92_cd24026726.json'))
-    : axios({
-        url: '/92/cd24026726.json',
-        params,
-      });
+  axios({
+    url: '/92/cd24026726.json',
+    params,
+  });

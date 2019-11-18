@@ -1,4 +1,4 @@
-export let DEV: boolean = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
+export let DEV: boolean = false; // process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
 
 /**
  * 生产环境
@@ -15,6 +15,7 @@ export { domain, host };
 
 export const LocalStorageKeys = {
   user: 'user', // 用户身份
+  userinfo: 'userinfo',
 };
 
 export let AUTHOR = '成都印钞有限公司';
