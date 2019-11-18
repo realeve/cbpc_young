@@ -249,7 +249,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
       },
     ];
 
-    const [filter, setFilter] = useState('李宾');
+    const [filter, setFilter] = useState(''); // 李宾
 
     return (
       <>
