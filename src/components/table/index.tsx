@@ -40,11 +40,14 @@ export default function({
     const { title, source } = data;
     const filename = `${title}`;
 
-    const header = columns.map(item =>
-      item.children ? item.children.map(child => child.title) : item.title,
-    );
+    const header = columns
+      .filter(item => typeof item.render === 'undefined')
+      .map(item => (item.children ? item.children.map(child => child.title) : item.title));
+
     const keys = R.flatten(
-      R.map(item => (item.children ? item.children.map(child => child.key) : item.key))(columns),
+      R.map(item => (item.children ? item.children.map(child => child.key) : item.key))(
+        columns.filter(item => typeof item.render === 'undefined'),
+      ),
     );
 
     const body = data.data

@@ -58,3 +58,16 @@ export const delCbpcYoungBase = _id =>
       _id,
     },
   });
+
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 青年积分系统_额外加分修改 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号
+    const { rec_date, remark, score, score_type, _id } = params;
+*/
+export const setCbpcYoungOther = params =>
+  axios({
+    url: '/101/74654847ae.json',
+    params,
+  });

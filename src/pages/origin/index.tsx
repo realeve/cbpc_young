@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useFetch, Table } from '@/components';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
-import { Divider, Input, message } from 'antd';
+import { Divider, Input, message, Modal, Select } from 'antd';
 import * as db from './db';
 import * as R from 'ramda';
+import styles from './index.less';
+import { useSetState } from 'react-use';
 
 interface IDbData {
   username: string;
@@ -14,13 +16,13 @@ interface IDbData {
   score: number;
   remark: string;
 }
-import { Modal } from 'antd';
 
 const { confirm } = Modal;
+const { Option } = Select;
 
 export default connect(({ common }: { common: ICommon }) => common)(
   ({ tstart, tend, user }: ICommon) => {
-    const [trigger, setTrigger] = useState(null);
+    // const [trigger, setTrigger] = useState(null);
 
     const { data, loading, setData } = useFetch<{
       title: string;
@@ -28,7 +30,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
     }>({
       param: {
         url: '/93/1a31795568.json',
-        params: { tstart, tend, trigger },
+        params: { tstart, tend },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
     });
@@ -36,7 +38,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
     const { data: base, loading: loadingBase, setData: setBaseData } = useFetch({
       param: {
         url: '/94/966772bc13.json',
-        params: { tstart, tend, trigger },
+        params: { tstart, tend },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
     });
@@ -68,6 +70,9 @@ export default connect(({ common }: { common: ICommon }) => common)(
         删除
       </a>
     );
+
+    const [visible, setVisible] = useState(false);
+    const [state, setState] = useSetState({});
 
     const columnsOther = [
       {
@@ -115,7 +120,14 @@ export default connect(({ common }: { common: ICommon }) => common)(
           if (user.gm == '1' || user.manage_dept.includes(item.deptname)) {
             return (
               <span>
-                <a>编辑</a>
+                <a
+                  onClick={() => {
+                    setVisible(true);
+                    setState(item);
+                  }}
+                >
+                  编辑
+                </a>
                 <Divider type="vertical" />
                 <DelBtn id={item.id} />
               </span>
@@ -228,7 +240,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
       },
     ];
 
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState('李宾');
 
     return (
       <>
@@ -258,6 +270,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
           merge={['4-6', '7-8', '9']}
           mergetext={['生产操作岗', '生产保障岗位', '管理技术人员']}
         />
+
         <Table
           loading={loading}
           daterange={[tstart, tend]}
@@ -266,6 +279,87 @@ export default connect(({ common }: { common: ICommon }) => common)(
           columns={columnsOther}
           style={{ marginTop: 30 }}
         />
+
+        <Modal
+          title="编辑数据"
+          visible={visible}
+          onCancel={() => {
+            setVisible(false);
+          }}
+          onOk={() => {
+            let { rec_date, remark, score, score_type, id: _id } = state;
+            let params = {
+              rec_date,
+              remark,
+              score,
+              score_type,
+              _id,
+            };
+            db.setCbpcYoungOther(params).then(() => {
+              setVisible(false);
+              message.success('修改成功');
+              // 更新数据
+              let idx = R.findIndex(item => item.id == _id)(data.data);
+              let nextData = R.update(idx, state, data.data);
+              setData({ ...data, data: nextData });
+            });
+          }}
+          okText="保存"
+        >
+          <div className={styles.form}>
+            <div className={styles.item}>
+              <div className={styles.label}>姓名</div>
+              <span>{state.username}</span>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>部门</div>
+              <span>{state.deptname}</span>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>记录月份</div>
+              <Input
+                value={state.rec_date}
+                onChange={e => setState({ rec_date: e.target.value })}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>得分类型</div>
+              <Select
+                value={state.score_type}
+                className={styles.input}
+                onChange={(score_type: string) =>
+                  setState({
+                    score_type,
+                  })
+                }
+              >
+                {`能力素质积分,活动积分,组织公民行为积分,技术、创新成果`.split(',').map(item => (
+                  <Option value={item} key={item}>
+                    {item}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>得分</div>
+              <Input
+                value={state.score}
+                onChange={e => setState({ score: e.target.value })}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.item}>
+              <div className={styles.label}>备注信息</div>
+              <Input.TextArea
+                value={state.remark}
+                onChange={e => setState({ remark: e.target.value })}
+                rows={3}
+                className={styles.input}
+              />
+            </div>
+          </div>
+        </Modal>
       </>
     );
   },
