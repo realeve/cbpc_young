@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useFetch, Table } from '@/components';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
-import { Divider, Input } from 'antd';
+import { Divider, Input, message } from 'antd';
+import * as db from './db';
+import * as R from 'ramda';
 
 interface IDbData {
   username: string;
@@ -12,27 +14,60 @@ interface IDbData {
   score: number;
   remark: string;
 }
+import { Modal } from 'antd';
+
+const { confirm } = Modal;
 
 export default connect(({ common }: { common: ICommon }) => common)(
   ({ tstart, tend, user }: ICommon) => {
-    const { data, loading } = useFetch<{
+    const [trigger, setTrigger] = useState(null);
+
+    const { data, loading, setData } = useFetch<{
       title: string;
       data: IDbData[];
     }>({
       param: {
         url: '/93/1a31795568.json',
-        params: { tstart, tend },
+        params: { tstart, tend, trigger },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
     });
 
-    const { data: base, loading: loadingBase } = useFetch({
+    const { data: base, loading: loadingBase, setData: setBaseData } = useFetch({
       param: {
         url: '/94/966772bc13.json',
-        params: { tstart, tend },
+        params: { tstart, tend, trigger },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
     });
+
+    // 删除数据
+    const DelBtn = ({ id, isBase = false }) => (
+      <a
+        onClick={() => {
+          confirm({
+            title: '确定删除这条信息?',
+            content: '删除后将不可找回',
+            onOk() {
+              db[isBase ? 'delCbpcYoungBase' : 'delCbpcYoungOther'](id).then(() => {
+                message.success('删除成功');
+                if (isBase) {
+                  let res = R.reject(item => item.id == id)(base.data);
+                  setBaseData({ ...base, data: res });
+                } else {
+                  let res = R.reject(item => item.id == id)(data.data);
+                  setData({ ...data, data: res });
+                }
+                // 重新加载数据
+                // setTrigger(Math.round(new Date()));
+              });
+            },
+          });
+        }}
+      >
+        删除
+      </a>
+    );
 
     const columnsOther = [
       {
@@ -76,13 +111,13 @@ export default connect(({ common }: { common: ICommon }) => common)(
       {
         title: '操作',
         key: 'action',
-        render: ({ deptname }) => {
-          if (user.gm == '1' || user.manage_dept.includes(deptname)) {
+        render: item => {
+          if (user.gm == '1' || user.manage_dept.includes(item.deptname)) {
             return (
               <span>
                 <a>编辑</a>
                 <Divider type="vertical" />
-                <a>删除</a>
+                <DelBtn id={item.id} />
               </span>
             );
           }
@@ -178,13 +213,13 @@ export default connect(({ common }: { common: ICommon }) => common)(
       {
         title: '操作',
         key: 'action',
-        render: ({ deptname }) => {
-          if (user.gm == '1' || user.manage_dept.includes(deptname)) {
+        render: item => {
+          if (user.gm == '1' || user.manage_dept.includes(item.deptname)) {
             return (
               <span>
                 <a>编辑</a>
                 <Divider type="vertical" />
-                <a>删除</a>
+                <DelBtn isBase id={item.id} />
               </span>
             );
           }

@@ -30,3 +30,31 @@ export const getCbpcYoungBase = () =>
   axios({
     url: '/94/966772bc13.json',
   });
+
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 青年积分系统_删除额外加分 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号
+      */
+export const delCbpcYoungOther = _id =>
+  axios({
+    url: '/99/67625fb6e7.json',
+    params: {
+      _id,
+    },
+  });
+
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 青年积分系统_删除基础数据 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号
+      */
+export const delCbpcYoungBase = _id =>
+  axios({
+    url: '/100/d027eb0f64.json',
+    params: {
+      _id,
+    },
+  });
