@@ -13,3 +13,13 @@ export const getCbpcYoungOther = (params: any) =>
     url: '/92/cd24026726.json',
     params,
   });
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 青年积分排名(不含活动积分、公民行为积分) } 
+    const { tstart, tend, tstart2, tend2 } = params;
+*/
+export const getCbpcYoungOther2 = params =>
+  axios({
+    url: '/98/c578560fbf.json',
+    params,
+  });

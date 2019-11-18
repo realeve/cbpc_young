@@ -23,6 +23,7 @@ import { Dispatch } from 'redux';
 import { axios } from '@/utils/axios';
 import { LocalStorageKeys } from '@/utils/setting';
 import { encodeBase64 } from '@/utils/lib';
+import * as R from 'ramda';
 const { MonthPicker } = DatePicker;
 
 const { Header, Content, Footer } = Layout;
@@ -132,7 +133,7 @@ const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
               }
             >
               <div
-                style={{ cursor: 'pointer' }}
+                className={styles.header}
                 onClick={() => {
                   if (user.username.length > 0) {
                     return;
@@ -141,15 +142,15 @@ const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
                 }}
               >
                 <Avatar size="large" icon="user" style={{ margin: '0 10px 0 30px' }} />
-                <span style={{ color: '#fff' }}>
-                  {user.username.length > 0 ? (
-                    <span>
-                      {user.deptname} {user.username}
-                    </span>
-                  ) : (
-                    '登录'
-                  )}
-                </span>
+
+                {user.username.length > 0 ? (
+                  <div className={styles.userInfo}>
+                    <span className={styles.item}>{user.deptname}</span>
+                    <span className={styles.item}>{user.username}</span>
+                  </div>
+                ) : (
+                  <div className={styles.userInfo}>登录</div>
+                )}
               </div>
             </Dropdown>
           </div>
@@ -196,6 +197,11 @@ const Login = ({
             return;
           }
           let user = res.data[0];
+          let manage_dept = res.data
+            .filter(item => item.manage_dept)
+            .map(item => item.manage_dept)
+            .join(',');
+          user.manage_dept = manage_dept;
 
           window.localStorage.setItem(
             LocalStorageKeys.userinfo,

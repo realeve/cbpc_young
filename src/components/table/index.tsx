@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import { Skeleton, Table, Button } from 'antd';
 import { ColumnProps, PaginationConfig } from 'antd/lib/table';
@@ -20,6 +20,7 @@ export default function({
   columns,
   style,
   daterange,
+  filter = '',
   ...props
 }: {
   columns?: ColumnProps<any>[];
@@ -29,6 +30,7 @@ export default function({
     title: string;
     data: any[];
   } | null;
+  filter?: string;
   style?: React.CSSProperties;
   [key: string]: any;
 }) {
@@ -69,6 +71,26 @@ export default function({
     Excel.save(config);
   };
 
+  const [distData, setDistData] = useState([]);
+
+  useEffect(() => {
+    let temp = R.clone(data) || { data: [] };
+
+    temp.data = temp.data.map((item, key) => ({ key: key + 1, ...item }));
+
+    if (filter.length === 0) {
+      setDistData(temp);
+      return;
+    }
+
+    temp.data = temp.data.filter(item =>
+      Object.values(item)
+        .join(',')
+        .includes(filter),
+    );
+    setDistData(temp);
+  }, [data, filter]);
+
   return (
     <Skeleton loading={loading}>
       <div className={styles.table} style={style}>
@@ -93,7 +115,7 @@ export default function({
         <Table
           columns={columns}
           bordered
-          dataSource={data ? data.data.map((item, key) => ({ key: key + 1, ...item })) : []}
+          dataSource={distData.data}
           pagination={{
             ...pageConfig,
             pageSize,

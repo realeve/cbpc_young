@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Icon, Upload, Spin, notification, Progress } from 'antd';
 import * as lib from '@/utils/lib';
-// import styles from './index.less';
+import styles from './index.less';
 import Excel from 'exceljs/dist/es5/exceljs.browser.js';
 import * as R from 'ramda';
 import * as db from './db';
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
 
 import { Typography, Divider } from 'antd';
 
@@ -35,15 +37,16 @@ handleImport() {
   }
 } */
 
-export default () => {
+const ImportApp = ({ user }: ICommon) => {
   const [sheet, setSheet] = useState([]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [percent, setPercent] = useState(0);
   const [uploadStatus, setUploadStatus] = useState('active');
+  const [importMessage, setImportMessage] = useState<string | null>(null);
 
   const decodeXlsx = async sheet => {
-    let data = [];
+    let src = [];
     let header = [];
     let api = '';
     let message = '';
@@ -52,12 +55,12 @@ export default () => {
       if (rowIndex === 1) {
         header = res;
       } else {
-        data.push(res);
+        src.push(res);
       }
     });
     // 其余得分
     if (header.includes('备注')) {
-      data = data.map(
+      src = src.map(
         ([username, usercode, deptname, rec_date, score_type, score = 0, remark = '']) => ({
           username,
           usercode,
@@ -69,11 +72,9 @@ export default () => {
         }),
       );
       api = 'addCbpcYoungOther';
-      message = `【其余积分】数据共${data.length}条 上传完毕`;
     } else {
       api = 'addCbpcYoungBase';
-      message = `【岗位业绩积分】数据共${data.length}条 上传完毕`;
-      data = data.map(
+      src = src.map(
         ([
           username,
           usercode,
@@ -107,6 +108,14 @@ export default () => {
     setUploading(true);
     setUploadStatus('active');
 
+    let data = src;
+    if (String(user.gm) !== '1') {
+      data = src.filter(item => user.manage_dept.includes(item.deptname));
+    }
+    message = `【${api === 'addCbpcYoungBase' ? '岗位业绩积分' : '其余积分'}】数据共${
+      data.length
+    }条 上传完毕`;
+
     let dataList = R.splitEvery(uploadSize, data);
     let isSuccess = true;
     for (let i = 0; isSuccess && i < dataList.length; i++) {
@@ -128,12 +137,13 @@ export default () => {
         message: '上传完毕',
         description: message,
       });
+      setImportMessage(`本次共读取信息${src.length}条，有效数据${data.length}条。`);
     }
   };
 
   // 文件对象：https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
   return (
-    <div>
+    <div className={styles.import}>
       <Typography>
         <Title level={2}>文件上传注意事项</Title>
         <Paragraph>文件上传前请仔细阅读以下注意事项，否则会导致上传失败：</Paragraph>
@@ -168,8 +178,21 @@ export default () => {
           </ul>
         </Paragraph>
         <Divider />
+        <Title level={3}>用户权限</Title>
+        <Paragraph>
+          您当前登录用户可以上传、编辑、删除
+          {user.gm == 1 ? (
+            <span>
+              <Text mark>所有部门人员信息</Text>
+            </span>
+          ) : (
+            <Text mark>{user.manage_dept}相关信息</Text>
+          )}
+          。
+        </Paragraph>
+        <Divider />
       </Typography>
-      <div style={{ width: 300, marginBottom: 20 }}>
+      <div className={styles.uploadWrapper}>
         <Upload.Dragger
           showUploadList={false}
           accept=".xlsx"
@@ -213,18 +236,32 @@ export default () => {
           {uploading && <Progress percent={percent} size="small" status={uploadStatus} />}
         </Upload.Dragger>
       </div>
-      {sheet.map((item, key) => (
-        <Button
-          type="primary"
-          style={{ marginLeft: 20 }}
-          key={key}
-          onClick={() => {
-            decodeXlsx(item);
-          }}
-        >
-          导入{item.name}数据
-        </Button>
-      ))}
+
+      <div>
+        {sheet.map((item, key) => (
+          <Button
+            type="primary"
+            style={{ marginLeft: key > 0 ? 20 : 0, width: 160 }}
+            key={key}
+            onClick={() => {
+              decodeXlsx(item);
+            }}
+          >
+            导入{item.name}数据
+          </Button>
+        ))}
+      </div>
+
+      {importMessage && (
+        <Typography className={styles.result}>
+          <Title level={3}>导入结果</Title>
+          <Paragraph>{importMessage}</Paragraph>
+        </Typography>
+      )}
     </div>
   );
 };
+
+export default connect(({ common }: { common: ICommon }) => ({
+  user: common.user,
+}))(ImportApp);

@@ -12,6 +12,7 @@ export interface ICommon {
     username: string;
     deptname: string;
     gm: number;
+    manage_dept: string;
   };
 }
 const namespace = 'common';
@@ -25,6 +26,7 @@ export default {
       username: '',
       deptname: '',
       gm: 0,
+      manage_dept: '',
     },
   },
   reducers: {
