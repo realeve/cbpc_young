@@ -24,6 +24,7 @@ import { axios } from '@/utils/axios';
 import { LocalStorageKeys } from '@/utils/setting';
 import { encodeBase64 } from '@/utils/lib';
 import * as R from 'ramda';
+import { userInfo } from 'os';
 const { MonthPicker } = DatePicker;
 
 const { Header, Content, Footer } = Layout;
@@ -62,7 +63,7 @@ interface IProps extends ICommon {
   dispatch: Dispatch;
 }
 const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(user.username.length === 0);
 
   return (
     <div className={styles.container}>
@@ -171,6 +172,7 @@ const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
             setVisible(false);
           }}
           dispatch={dispatch}
+          user={user}
         />
       </Layout>
     </div>
@@ -181,6 +183,7 @@ const Login = ({
   visible,
   onOk,
   dispatch,
+  user,
 }: {
   visible: boolean;
   onOk: () => void;
@@ -221,7 +224,13 @@ const Login = ({
           onOk();
         });
       }}
-      onCancel={onOk}
+      onCancel={() => {
+        if (user.username.length === 0) {
+          message.error('请先登录');
+          return;
+        }
+        onOk();
+      }}
     >
       <Input
         style={{ width: 300 }}
