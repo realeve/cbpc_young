@@ -29,7 +29,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
       data: IDbData[];
     }>({
       param: {
-        url: '/93/1a31795568.json',
+        url: '/688/1a31795568.json',
         params: { tstart, tend },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
@@ -37,7 +37,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
 
     const { data: base, loading: loadingBase, setData: setBaseData } = useFetch({
       param: {
-        url: '/94/966772bc13.json',
+        url: '/689/966772bc13.json',
         params: { tstart, tend },
       },
       valid: () => tstart.length > 0 && tend.length > 0,
@@ -316,6 +316,7 @@ export default connect(({ common }: { common: ICommon }) => common)(
               Number(support_prod) +
               Number(support_attitude) +
               Number(manager);
+            setState({ score });
 
             let params = {
               rec_date,

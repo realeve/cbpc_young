@@ -4,7 +4,7 @@ export let DEV: boolean = false; // process.env.NODE_ENV === 'development' || pr
  * 生产环境
  */
 const SETTING: { [key: string]: string } = {
-  host: '//localhost:90',
+  host: DEV ? '//localhost:90' : '//10.8.1.25:100',
 };
 
 // 后台api部署域名

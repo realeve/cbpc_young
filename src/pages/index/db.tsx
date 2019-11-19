@@ -10,7 +10,7 @@ import { axios, DEV, mock } from '@/utils/axios';
 */
 export const getCbpcYoungOther = (params: any) =>
   axios({
-    url: '/92/cd24026726.json',
+    url: '/687/cd24026726.json',
     params,
   });
 /**
@@ -20,6 +20,6 @@ export const getCbpcYoungOther = (params: any) =>
 */
 export const getCbpcYoungOther2 = params =>
   axios({
-    url: '/98/c578560fbf.json',
+    url: '/693/c578560fbf.json',
     params,
   });

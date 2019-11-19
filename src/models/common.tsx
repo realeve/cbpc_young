@@ -19,7 +19,7 @@ const namespace = 'common';
 export default {
   namespace,
   state: {
-    tstart: moment().format('YYYY-MM'),
+    tstart: moment().format('YYYY-01'),
     tend: moment().format('YYYY-MM'),
     user: {
       uid: '',

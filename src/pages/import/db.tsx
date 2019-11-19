@@ -10,7 +10,7 @@ export const addCbpcYoungBase = values =>
     method: 'post',
     data: {
       values,
-      id: 95,
+      id: 690,
       nonce: 'f6b1dff03f',
     },
   });
@@ -25,7 +25,7 @@ export const addCbpcYoungOther = values =>
     method: 'post',
     data: {
       values,
-      id: 96,
+      id: 691,
       nonce: 'd3450882c0',
     },
   });

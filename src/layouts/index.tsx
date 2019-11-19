@@ -50,7 +50,7 @@ const menu = [
 */
 export const getCbpcYoungUser = params =>
   axios({
-    url: '/97/ca81a02b59.json',
+    url: '/692/ca81a02b59.json',
     params,
   });
 
@@ -84,35 +84,6 @@ const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
             </Menu>
           </div>
           <div className={styles.center}>
-            <MonthPicker
-              placeholder="开始月份"
-              onChange={(_, tstart) => {
-                if (tend.length > 0 && tstart > tend) {
-                  message.error('无效的日期：开始月份必须 大于 结束月份');
-                  return;
-                }
-                dispatch({
-                  type: 'common/setStore',
-                  payload: { tstart },
-                });
-              }}
-              value={moment(tstart)}
-            />
-            <span style={{ margin: 10, color: '#fff' }}>至</span>
-            <MonthPicker
-              placeholder="结束月份"
-              value={moment(tend)}
-              onChange={(_, tend) => {
-                if (tstart > tend) {
-                  message.error('无效的日期：开始月份必须 大于 结束月份');
-                  return;
-                }
-                dispatch({
-                  type: 'common/setStore',
-                  payload: { tend },
-                });
-              }}
-            />
             <Dropdown
               overlay={
                 <Menu>
@@ -156,6 +127,41 @@ const App = ({ children, location, dispatch, tstart, tend, user }: IProps) => {
           </div>
         </Header>
         <Content style={{ margin: 50, padding: 24, background: '#fff', flex: 1 }}>
+          {!location.pathname.includes('/import') && (
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10 }}>
+              <span style={{ margin: 10 }}>起始月份：</span>
+              <MonthPicker
+                placeholder="开始月份"
+                onChange={(_, tstart) => {
+                  if (tend.length > 0 && tstart > tend) {
+                    message.error('无效的日期：开始月份必须 大于 结束月份');
+                    return;
+                  }
+                  dispatch({
+                    type: 'common/setStore',
+                    payload: { tstart },
+                  });
+                }}
+                value={moment(tstart)}
+              />
+              <span style={{ margin: 10 }}>至</span>
+              <MonthPicker
+                placeholder="结束月份"
+                value={moment(tend)}
+                onChange={(_, tend) => {
+                  if (tstart > tend) {
+                    message.error('无效的日期：开始月份必须 大于 结束月份');
+                    return;
+                  }
+                  dispatch({
+                    type: 'common/setStore',
+                    payload: { tend },
+                  });
+                }}
+              />
+            </div>
+          )}
+
           {children}
         </Content>
         <Footer style={{ textAlign: 'center' }}>CBPC ©2019</Footer>

@@ -79,7 +79,7 @@ export default connect(({ common }: { common: ICommon }) => common)(({ tstart, t
     data: IDbData[];
   }>({
     param: {
-      url: '/92/cd24026726.json',
+      url: '/687/cd24026726.json',
       params: { tstart, tend, tstart2: tstart, tend2: tend },
     },
     valid: () => tstart.length > 0 && tend.length > 0,
@@ -89,7 +89,7 @@ export default connect(({ common }: { common: ICommon }) => common)(({ tstart, t
     data: IDbData[];
   }>({
     param: {
-      url: '/98/c578560fbf.json',
+      url: '/693/c578560fbf.json',
       params: { tstart, tend, tstart2: tstart, tend2: tend },
     },
     valid: () => tstart.length > 0 && tend.length > 0,

@@ -17,7 +17,7 @@ tbl_cbpc_young_other AS a where a.rec_date between ? and ?
  */
 export const getCbpcYoungOther = () =>
   axios({
-    url: '/93/1a31795568.json',
+    url: '/688/1a31795568.json',
   });
 
 /**
@@ -28,7 +28,7 @@ export const getCbpcYoungOther = () =>
  */
 export const getCbpcYoungBase = () =>
   axios({
-    url: '/94/966772bc13.json',
+    url: '/689/966772bc13.json',
   });
 
 /**
@@ -39,7 +39,7 @@ export const getCbpcYoungBase = () =>
       */
 export const delCbpcYoungOther = _id =>
   axios({
-    url: '/99/67625fb6e7.json',
+    url: '/694/67625fb6e7.json',
     params: {
       _id,
     },
@@ -53,7 +53,7 @@ export const delCbpcYoungOther = _id =>
       */
 export const delCbpcYoungBase = _id =>
   axios({
-    url: '/100/d027eb0f64.json',
+    url: '/695/d027eb0f64.json',
     params: {
       _id,
     },
@@ -68,7 +68,7 @@ export const delCbpcYoungBase = _id =>
 */
 export const setCbpcYoungOther = params =>
   axios({
-    url: '/101/74654847ae.json',
+    url: '/696/74654847ae.json',
     params,
   });
 /**
@@ -80,6 +80,6 @@ export const setCbpcYoungOther = params =>
 */
 export const setCbpcYoungBase = params =>
   axios({
-    url: '/102/44b35940f1.json',
+    url: '/697/44b35940f1.json',
     params,
   });
