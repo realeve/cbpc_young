@@ -99,7 +99,7 @@ const ImportApp = ({ user }: ICommon) => {
           support_prod,
           support_attitude,
           manager,
-          score: R.type(score) === 'Object' ? score.result : score,
+          score: (R.type(score) === 'Object' ? score.result : score) || 0,
           uid: user.uid,
         }),
       );
@@ -132,6 +132,7 @@ const ImportApp = ({ user }: ICommon) => {
           setUploadStatus('exception');
           isSuccess = false;
         });
+      console.log(value);
     }
     if (isSuccess) {
       setUploading(false);
